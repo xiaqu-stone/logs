@@ -1,0 +1,61 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+
+android {
+    compileSdkVersion conf.compileSdkVersion
+    defaultConfig {
+        minSdkVersion conf.minSdkVersion
+        targetSdkVersion conf.targetSdkVersion
+        versionCode conf.versionCode
+        versionName conf.versionName
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    implementation 'com.android.support:appcompat-v7:27.1.1'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'com.android.support.test:runner:1.0.2'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+}
+
+ext {
+    bintrayRepo = 'maven'
+    bintrayName = 'logs'
+
+    publishedGroupId = 'com.sqq.xiaqu'
+    libraryName = 'logs'
+    artifact = 'logs'
+
+    libraryVersion = '1.0.0'
+
+    libraryDescription = '简单实用的 Android Log 封装，支持 json 格式化输出，超限字符串的分段输出，输出Log所在文件行数'
+
+    siteUrl = 'https://github.com/xiaqu-stone/logs'
+    gitUrl = 'https://github.com/xiaqu-stone/logs.git'
+
+    developerId = 'stone'
+    developerName = 'xiaqu-stone'
+    developerEmail = 'stone.xiaqu@gmail.com'
+
+    licenseName = 'The Apache Software License, Version 2.0'
+    licenseUrl = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+    allLicenses = ["Apache-2.0"]
+}
+
+apply from: "https://raw.githubusercontent.com/xiaqu-stone/ComPro/master/install-v1.gradle"
+apply from: "bintray.gradle"
+//apply from: "https://raw.githubusercontent.com/xiaqu-stone/ComPro/master/bintray-v1.gradle"

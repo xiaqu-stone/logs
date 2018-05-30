@@ -1,0 +1,49 @@
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+
+buildscript {
+    ext {
+        //版本统一管理，此种配置可以使得AS提示新版本
+        //android版本配置
+        conf = [
+                buildToolsVersion: '27.0.3', //最新版本的AS无需配置buildToolsVersion
+                compileSdkVersion: 27,
+                minSdkVersion    : 15,
+                targetSdkVersion : 27,
+                versionCode      : 1,
+                versionName      : '1.0.0'
+        ]
+        kotlin_version = '1.2.41'
+        anko_version = '0.10.4'
+        support = '27.1.1'
+        //https://developer.android.com/topic/libraries/support-library/revisions.html
+        constraint = '1.1.0'
+    }
+
+    repositories {
+        google()
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:3.1.2'
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.8.0'
+        classpath 'com.github.dcendents:android-maven-gradle-plugin:2.1'
+        // NOTE: Do not place your application dependencies here; they belong
+        // in the individual module build.gradle files
+    }
+}
+
+allprojects {
+    repositories {
+        maven {
+            url = "https://dl.bintray.com/xiaqu-stone/maven"
+        }
+        google()
+        jcenter()
+        mavenCentral()
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}
