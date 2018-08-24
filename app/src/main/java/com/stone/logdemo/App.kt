@@ -13,6 +13,6 @@ class App : Application() {
 
     override fun attachBaseContext(base: Context?) {
         super.attachBaseContext(base)
-        Logs.init(BuildConfig.DEBUG, "log-demo")
+        Logs.init(Logs.DEBUG, "log-demo")
     }
 }

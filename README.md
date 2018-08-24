@@ -36,14 +36,15 @@
 
 程序开始处调用初始化开关与全局TAG即可
 ```
-Logs.init(BuildConfig.DEBUG, "log-demo")
+Logs.init(Logs.DEBUG, "log-demo")
 ```
+
 ## 配置
 
 gradle
 
 ```
-implementation "com.sqq.xiaqu:logs:1.0.0"
+implementation "com.sqq.xiaqu:logs:1.0.1"
 ```
 maven 
 ```
@@ -54,3 +55,7 @@ maven
   <type>pom</type>
 </dependency>
 ```
+
+## 更新日志
+
+- `v1.0.1` log开关的控制方式，更改为等级控制，使得release包也可以输出一些关键信息。

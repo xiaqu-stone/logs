@@ -76,7 +76,7 @@ class Logs private constructor() {
         }
 
         fun i(tag: String, str: Any) {
-            if (level >= INFO) {
+            if (level <= INFO) {
                 val name = functionName
                 val t = getTag(tag)
                 if (name != null) {
@@ -88,7 +88,7 @@ class Logs private constructor() {
         }
 
         fun d(tag: String, str: Any) {
-            if (level >= DEBUG) {
+            if (level <= DEBUG) {
                 val name = functionName
                 val t = getTag(tag)
                 if (name != null) {
@@ -104,7 +104,7 @@ class Logs private constructor() {
         }
 
         fun v(tag: String, str: Any) {
-            if (level >= VERBOSE) {
+            if (level <= VERBOSE) {
                 val name = functionName
                 val t = getTag(tag)
                 if (name != null) {
@@ -116,7 +116,7 @@ class Logs private constructor() {
         }
 
         fun w(tag: String, str: Any) {
-            if (level >= WARN) {
+            if (level <= WARN) {
                 val name = functionName
                 val t = getTag(tag)
                 if (name != null) {
@@ -128,7 +128,7 @@ class Logs private constructor() {
         }
 
         fun e(tag: String, str: Any) {
-            if (level >= ERROR) {
+            if (level <= ERROR) {
                 val name = functionName
                 val t = getTag(tag)
                 if (name != null) {
@@ -140,13 +140,13 @@ class Logs private constructor() {
         }
 
         fun e(ex: Exception) {
-            if (level >= ERROR) {
+            if (level <= ERROR) {
                 Log.e(TAG, "error", ex)
             }
         }
 
         fun e(log: String, tr: Throwable) {
-            if (level >= ERROR) {
+            if (level <= ERROR) {
                 val line = functionName
                 Log.e(TAG, "{Thread:" + Thread.currentThread().name + "}"
                         + "[" + line + ":] " + log + "\n", tr)
@@ -202,7 +202,7 @@ class Logs private constructor() {
          * @param json
          */
         fun json(tag: String, json: Any, url: String?) {
-            if (level >= DEBUG) {
+            if (level <= DEBUG) {
                 var name = functionName
                 if (name == null) name = ""
                 Log.d(tag, "╔═══════════════════════════════════════════════════════════════════════════════════════")
