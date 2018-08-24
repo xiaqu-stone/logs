@@ -20,10 +20,15 @@ class Logs private constructor() {
     }
 
     companion object {
+        const val VERBOSE = 1
+        const val DEBUG = 2
+        const val INFO = 3
+        const val WARN = 4
+        const val ERROR = 5
         /**
          * 是否输出log
          */
-        private var isDebug = true
+        private var level = DEBUG
         /**
          * json格式化显示的缩进字符数
          */
@@ -37,15 +42,16 @@ class Logs private constructor() {
          */
         private val LINE_SEPARATOR = System.getProperty("line.separator")
 
-        private const val VERBOSE = 1
-        private const val DEBUG = 2
-        private const val INFO = 3
-        private const val WARN = 4
-        private const val ERROR = 5
+
         private const val MAX_SINGLE_LOG_LENGTH = 3 * 1024//单条log系统默认最大输出限制，超出会自动截掉
 
-        fun init(isDebug: Boolean, defaultTag: String) {
-            this.isDebug = isDebug
+        /**
+         * 初始化Logs
+         * @param level 控制log的输出等级
+         * @param defaultTag 默认的全局log TAG
+         */
+        fun init(level: Int = DEBUG, defaultTag: String = "logs") {
+            this.level = level
             this.TAG = defaultTag
         }
 
@@ -70,27 +76,25 @@ class Logs private constructor() {
         }
 
         fun i(tag: String, str: Any) {
-            var tag = tag
-            if (isDebug) {
+            if (level >= INFO) {
                 val name = functionName
-                tag = getTag(tag)
+                val t = getTag(tag)
                 if (name != null) {
-                    log(INFO, tag, "$name - $str")
+                    log(INFO, t, "$name - $str")
                 } else {
-                    log(INFO, tag, str.toString())
+                    log(INFO, t, str.toString())
                 }
             }
         }
 
         fun d(tag: String, str: Any) {
-            var tag = tag
-            if (isDebug) {
+            if (level >= DEBUG) {
                 val name = functionName
-                tag = getTag(tag)
+                val t = getTag(tag)
                 if (name != null) {
-                    log(DEBUG, tag, "$name - $str")
+                    log(DEBUG, t, "$name - $str")
                 } else {
-                    log(DEBUG, tag, str.toString())
+                    log(DEBUG, t, str.toString())
                 }
             }
         }
@@ -100,52 +104,49 @@ class Logs private constructor() {
         }
 
         fun v(tag: String, str: Any) {
-            var tag = tag
-            if (isDebug) {
+            if (level >= VERBOSE) {
                 val name = functionName
-                tag = getTag(tag)
+                val t = getTag(tag)
                 if (name != null) {
-                    log(VERBOSE, tag, "$name - $str")
+                    log(VERBOSE, t, "$name - $str")
                 } else {
-                    log(VERBOSE, tag, str.toString())
+                    log(VERBOSE, t, str.toString())
                 }
             }
         }
 
         fun w(tag: String, str: Any) {
-            var tag = tag
-            if (isDebug) {
+            if (level >= WARN) {
                 val name = functionName
-                tag = getTag(tag)
+                val t = getTag(tag)
                 if (name != null) {
-                    log(WARN, tag, "$name - $str")
+                    log(WARN, t, "$name - $str")
                 } else {
-                    log(WARN, tag, str.toString())
+                    log(WARN, t, str.toString())
                 }
             }
         }
 
         fun e(tag: String, str: Any) {
-            var tag = tag
-            if (isDebug) {
+            if (level >= ERROR) {
                 val name = functionName
-                tag = getTag(tag)
+                val t = getTag(tag)
                 if (name != null) {
-                    log(ERROR, tag, "$name - $str")
+                    log(ERROR, t, "$name - $str")
                 } else {
-                    log(ERROR, tag, str.toString())
+                    log(ERROR, t, str.toString())
                 }
             }
         }
 
         fun e(ex: Exception) {
-            if (isDebug) {
+            if (level >= ERROR) {
                 Log.e(TAG, "error", ex)
             }
         }
 
         fun e(log: String, tr: Throwable) {
-            if (isDebug) {
+            if (level >= ERROR) {
                 val line = functionName
                 Log.e(TAG, "{Thread:" + Thread.currentThread().name + "}"
                         + "[" + line + ":] " + log + "\n", tr)
@@ -181,7 +182,6 @@ class Logs private constructor() {
                     showLog(level, tag, msg)
                 }
             }
-
         }
 
         private fun showLog(level: Int, tag: String, msg: Any) {
@@ -202,7 +202,7 @@ class Logs private constructor() {
          * @param json
          */
         fun json(tag: String, json: Any, url: String?) {
-            if (isDebug) {
+            if (level >= DEBUG) {
                 var name = functionName
                 if (name == null) name = ""
                 Log.d(tag, "╔═══════════════════════════════════════════════════════════════════════════════════════")
