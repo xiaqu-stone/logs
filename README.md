@@ -44,7 +44,7 @@ Logs.init(Logs.DEBUG, "log-demo")
 gradle
 
 ```
-implementation "com.sqq.xiaqu:logs:1.0.1"
+implementation "com.sqq.xiaqu:logs:1.0.2"
 ```
 maven 
 ```
@@ -59,3 +59,4 @@ maven
 ## 更新日志
 
 - `v1.0.1` log开关的控制方式，更改为等级控制，使得release包也可以输出一些关键信息。
+- `v1.0.2` 添加默认全局tag，避免未调用init时，因tag为空字符串，导致log未被输出

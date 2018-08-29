@@ -36,7 +36,7 @@ class Logs private constructor() {
         /**
          * 应用Log标签（用以本应用Log打印的默认TAG）
          */
-        private var TAG = ""
+        private var TAG = "logs"
         /**
          * 行分隔符
          */
@@ -145,11 +145,11 @@ class Logs private constructor() {
             }
         }
 
-        fun e(log: String, tr: Throwable) {
+        fun e(msg: String, tag: String? = null, tr: Throwable) {
             if (level <= ERROR) {
                 val line = functionName
-                Log.e(TAG, "{Thread:" + Thread.currentThread().name + "}"
-                        + "[" + line + ":] " + log + "\n", tr)
+                Log.e(tag ?: TAG, "{Thread:" + Thread.currentThread().name + "}"
+                        + "[" + line + ":] " + msg + "\n", tr)
             }
         }
 

@@ -40,7 +40,7 @@ ext {
     libraryName = 'logs'
     artifact = 'logs'
 
-    libraryVersion = '1.0.1'
+    libraryVersion = '1.0.2'
 
     libraryDescription = '简单实用的 Android Log 封装，支持 json 格式化输出，超限字符串的分段输出，输出Log所在文件行数'
 
