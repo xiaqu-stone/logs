@@ -207,7 +207,7 @@ class Logs private constructor() {
                 if (name == null) name = ""
                 Log.d(tag, "╔═══════════════════════════════════════════════════════════════════════════════════════")
                 if (!TextUtils.isEmpty(url))
-                    Log.w(tag, "║ onResponseSuccess URL：" + url!!)
+                    Log.i(tag, "║ onResponseSuccess URL：" + url!!)
                 printJson(tag, name, json.toString())
                 Log.d(tag, "╚═══════════════════════════════════════════════════════════════════════════════════════")
             }
