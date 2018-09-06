@@ -10,9 +10,8 @@ import com.stone.log.Logs
  */
 class App : Application() {
 
-
     override fun attachBaseContext(base: Context?) {
         super.attachBaseContext(base)
-        Logs.init(Logs.DEBUG, "log-demo")
+        Logs.init(Logs.DEBUG, "logs")
     }
 }

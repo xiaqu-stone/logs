@@ -8,6 +8,7 @@
 1. 针对`json`格式化输出
 2. 设置APP的全局Log标签
 3. 输出Logs代码调用处：所在线程、所在文件、所在方法、所在行数
+4. 对于超限字符串自动分段输出，避免log信息丢失
 
 ## json效果输出
 
@@ -44,7 +45,7 @@ Logs.init(Logs.DEBUG, "log-demo")
 gradle
 
 ```
-implementation "com.sqq.xiaqu:logs:1.0.3"
+implementation "com.sqq.xiaqu:logs:1.1.0"
 ```
 maven 
 ```
@@ -61,3 +62,4 @@ maven
 - `v1.0.1` log开关的控制方式，更改为等级控制，使得release包也可以输出一些关键信息。
 - `v1.0.2` 添加默认全局tag，避免未调用init时，因tag为空字符串，导致log未被输出
 - `v1.0.3` 修改json中的url输出等级
+- `v1.1.0` Java静态封装，方便Java代码中调用，避免kt的伴生对象
