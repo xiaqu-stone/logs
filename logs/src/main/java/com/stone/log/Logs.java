@@ -200,6 +200,7 @@ public class Logs {
     public static void json(String tag, Object json, String url) {
         if (level <= DEBUG) {
             String name = getFunctionName();
+            tag = getTag(tag);
             Log.d(tag, "╔═══════════════════════════════════════════════════════════════════════════════════════");
             if (!TextUtils.isEmpty(url))
                 Log.i(tag, "║ onResponseSuccess URL：" + url);
